@@ -13,7 +13,7 @@ node {
 		sh label: '', script: 'mvn clean compile'
 	}
         stage('Code verification') {
-                sh label: '', script: 'mvn clean verify  sonar:sonar -Dsonar.projectKey=$SNARQUBE_KEY -Dsonar.host.url=$SONARQUBE_URL:$SONARQUBE_PORT -Dsonar.login=$SNARQUBE_LOGIN'
+                sh label: '', script: 'mvn clean verify  sonar:sonar -Dsonar.projectKey=$SNARQUBE_KEY -Dsonar.host.url=http://79.137.37.35:$SONARQUBE_PORT -Dsonar.login=$SNARQUBE_LOGIN'
         }
 
 }
