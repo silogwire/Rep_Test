@@ -25,7 +25,7 @@ node {
         }
 //        timeout(time: 10, unit: 'MINUTES') {
 //            waitForQualityGate abortPipeline: true
-//        }
+///        }
     }
 	  stage("Quality Gate"){
           timeout(time: 1, unit: 'HOURS') {
