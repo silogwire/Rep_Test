@@ -28,16 +28,14 @@ node {
 //        timeout(time: 10, unit: 'MINUTES') {
 //            waitForQualityGate abortPipeline: true
 ///        }
-    }
-	  stage("Quality Gate"){
-          timeout(time: 1, unit: 'HOURS') {
-              def qg = waitForQualityGate()
-              if (qg.status != 'OK') {
-                  emailext body: 'Your code was failed due to sonarqube quality gate', subject: 'Jenkins Failed Report', to: 'sihamlachir@gmail.com'
-                  error "Pipeline aborted due to quality gate failure: ${qg.status}"
-
-              }
           }
-      }
+    timeout(time: 10, unit: 'MINUTES') {
+              def qg= waitForQualityGate()
+            if (qg.status!= 'OK'){
+                error « Pipeline interrompu en raison d'un échec de la porte de qualité : ${qg.status} »
+            }
+        }         
+              echo 'Quality Gate Passed'
 
+    }
 }
