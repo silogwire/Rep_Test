@@ -25,9 +25,9 @@ node {
                 sh label: '', script: 'mvn clean package sonar:sonar -Dsonar.projectKey=my_TP_project -Dsonar.host.url=http://79.137.37.35:9000 -Dsonar.login=cb109055acc601bfe954274edfeeaa71359ed058'
 
         }
-        timeout(time: 10, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: true
-        }
+//        timeout(time: 10, unit: 'MINUTES') {
+//            waitForQualityGate abortPipeline: true
+//        }
           }
 stage("Quality Gate") {
     timeout(time: 100, unit: 'MINUTES') {
