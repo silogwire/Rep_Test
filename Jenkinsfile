@@ -30,7 +30,7 @@ node {
 ///        }
           }
 stage("Quality Gate") {
-    timeout(time: 10, unit: 'MINUTES') {
+    timeout(time: 100, unit: 'MINUTES') {
               def qg= waitForQualityGate()
             if (qg.status!= 'OK'){
                 error " Pipeline interrompu en raison d'un échec de la porte de qualité : ${qg.status} "
