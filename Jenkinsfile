@@ -25,12 +25,11 @@ pipeline {
     steps {
      withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'ID_Secret') {
 
-//        withSonarQubeEnv('sonarqube') {
 						sh 'mvn clean package sonar:sonar -Dsonar.login=d59c079a8ee100c3f1f14e92db651f9308ab9fd3'
        
  }
 }
-
+}
 	    stage("Quality Gate"){
         timeout(time: 15, unit: 'MINUTES') { // Just in case something goes wrong, pipeline will be killed after a timeout
         def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
