@@ -26,7 +26,7 @@ pipeline {
      withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'ID_Secret') {
 
 //        withSonarQubeEnv('sonarqube') {
-						sh 'mvn clean package sonar:sonar' -Dsonar.login=d59c079a8ee100c3f1f14e92db651f9308ab9fd3'
+						sh 'mvn clean package sonar:sonar -Dsonar.login=d59c079a8ee100c3f1f14e92db651f9308ab9fd3'
        
  }
         timeout(time: 10, unit: 'MINUTES') {
