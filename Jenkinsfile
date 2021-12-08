@@ -29,6 +29,7 @@ node {
 //            waitForQualityGate abortPipeline: true
 ///        }
           }
+stage("Quality Gate") {
     timeout(time: 10, unit: 'MINUTES') {
               def qg= waitForQualityGate()
             if (qg.status!= 'OK'){
