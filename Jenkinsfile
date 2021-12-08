@@ -17,26 +17,17 @@ node {
 //        stage('Code verification') {
  //               sh label: '', script: 'mvn clean verify  sonar:sonar -Dsonar.projectKey=my_TP_project -Dsonar.host.url=http://79.137.37.35:9000 -Dsonar.login=cb109055acc601bfe954274edfeeaa71359ed058'
    //     }
-        stage('Sonarqube') {
-    environment {
-        scannerHome = tool 'SonarQubeScanner'
+stage('Sonarqube') { 
+    environnement { 
+        scannerHome = outil 'SonarQubeScanner' 
     }
-        withSonarQubeEnv('sonarqube') {
-                sh label: '', script: 'mvn clean package sonar:sonar -Dsonar.projectKey=my_TP_project -Dsonar.host.url=http://79.137.37.35:9000 -Dsonar.login=cb109055acc601bfe954274edfeeaa71359ed058'
-
+    étapes { 
+        withSonarQubeEnv('sonarqube') { 
+            sh "${scannerHome}/bin/sonar-scanner" 
         }
-//        timeout(time: 10, unit: 'MINUTES') {
-//            waitForQualityGate abortPipeline: true
-///        }
-          }
-stage("Quality Gate") {
-    timeout(time: 100, unit: 'MINUTES') {
-              def qg= waitForQualityGate()
-            if (qg.status!= 'OK'){
-                error " Pipeline interrompu en raison d'un échec de la porte de qualité : ${qg.status} "
-           }
-        }         
-              echo 'Quality Gate Passed'
-
-  }
+        timeout(time : 10, unit : 'MINUTES') { 
+            waitForQualityGate abortPipeline : true 
+        } 
+    } 
+}
 }
