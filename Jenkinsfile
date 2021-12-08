@@ -32,6 +32,5 @@ node {
         waitForQualityGate abortPipeline: true
     }
   }
-}
 
 }
