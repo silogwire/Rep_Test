@@ -12,8 +12,29 @@ node {
 	stage('Build') {
 		sh label: '', script: 'mvn clean compile'
 	}
-        stage('Code verification') {
+//        stage('Code verification') {
+ //               sh label: '', script: 'mvn clean verify  sonar:sonar -Dsonar.projectKey=my_TP_project -Dsonar.host.url=http://79.137.37.35:9000 -Dsonar.login=cb109055acc601bfe954274edfeeaa71359ed058'
+   //     }
+        stage('Sonarqube') {
+    environment {
+        scannerHome = tool 'SonarQubeScanner'
+    }
+    steps {
+        withSonarQubeEnv('sonarqube') {
                 sh label: '', script: 'mvn clean verify  sonar:sonar -Dsonar.projectKey=my_TP_project -Dsonar.host.url=http://79.137.37.35:9000 -Dsonar.login=cb109055acc601bfe954274edfeeaa71359ed058'
+
         }
+//        timeout(time: 10, unit: 'MINUTES') {
+//            waitForQualityGate abortPipeline: true
+//        }
+    }
+}
+        stage("Quality Gate") {
+  steps {
+    timeout(time: 1, unit: 'MINUTES') {
+        waitForQualityGate abortPipeline: true
+    }
+  }
+}
 
 }
