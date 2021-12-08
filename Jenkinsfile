@@ -35,10 +35,11 @@ pipeline {
         timeout(time: 15, unit: 'MINUTES') { // Just in case something goes wrong, pipeline will be killed after a timeout
          waitForQualityGate abortPipeline: true
  // Reuse taskId previously collected by withSonarQubeEnv
+		}
             if (waitForQualityGate.status != 'OK') {
                 error "Pipeline aborted due to quality gate failure: ${waitForQualityGate.status}"
             }
         }
-    }}
+    }
 }
 }
